@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <img src="" alt="" id="img_cap">
+    <div class="container" id="capture">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Home</li>
+                    </ol>
+                    </nav>
+        
+                    <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Library</li>
+                    </ol>
+                    </nav>
+        
+                    <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-md-4"><div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>Aww yeah, you successfully rad this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                <hr>
+                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                    <h3>
+                        Fancy display heading
+                        <small class="text-muted">With faded secondary text</small>
+                    </h3>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-defaut" onclick="capture()">Capture </button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <script>
+        function saveBase64AsFile(base64, fileName) {
+    
+            var link = document.createElement("a");
+    
+            link.setAttribute("href", base64);
+            link.setAttribute("download", fileName);
+            link.click();
+        }
+        let capture = function(){
+            html2canvas(document.querySelector('#capture')).then(function(canvas) {
+                //document.querySelector('#capture').appendChild(canvas);
+                document.querySelector('#img_cap').src=canvas.toDataURL();
+                var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
+                console.log(base64URL)
+                saveBase64AsFile(base64URL,'test_'+ Math.floor(Math.random()) +'.jpg')
+            });
+        }
+    </script>
+</body>
+</html>
